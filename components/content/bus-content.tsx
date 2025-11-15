@@ -94,7 +94,7 @@ export const BusContent = () => {
         mode: z.enum(["bus"]).default("bus"),
       })
       .refine(
-        (data) => !data.returnDate || data.returnDate >= data.departureDate,
+        (data) => !data.returnDate || data.returnDate > data.departureDate,
         {
           message: t("validation.return_date_invalid"),
           path: ["returnDate"],
@@ -351,7 +351,7 @@ export const BusContent = () => {
 
                   setDateRange({
                     from: range.from ?? dateRange?.from ?? new Date(),
-                    to: range.to ?? new Date(),
+                    to: range.to ?? undefined, // Don't default to today
                   });
 
                   if (range.to) setCheckedRoundTrip(true);
@@ -359,11 +359,15 @@ export const BusContent = () => {
                 mode="range"
                 numberOfMonths={2}
                 locale={language}
-                defaultMonth={new Date()}
+                defaultMonth={dateRange?.from ?? new Date()}
                 buttonVariant="outline"
                 className="[--cell-size:--spacing(8)] md:[--cell-size:--spacing(10)]"
                 disabled={{
+                  // before: dateRange?.from
+                  //   ? new Date(dateRange.from.getTime() + 24 * 60 * 60 * 1000) // Day after departure
+                  //   : new Date(), // Today if no departure selected
                   before: new Date(),
+                  to: dateRange?.from ?? new Date(),
                 }}
               />
             </PopoverContent>

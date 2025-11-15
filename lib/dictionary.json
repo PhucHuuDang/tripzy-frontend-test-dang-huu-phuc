@@ -47,7 +47,7 @@
       "from_required": "From is required",
       "to_required": "To is required",
       "departure_date_required": "Departure date is required",
-      "return_date_invalid": "Return date must be after departure date",
+      "return_date_invalid": "Return date must be at least 1 day after departure date",
       "passengers_min": "Passengers must be at least 1",
       "passengers_max": "Max passengers is 20"
     }
@@ -100,7 +100,7 @@
       "from_required": "出发地为必填项",
       "to_required": "目的地为必填项",
       "departure_date_required": "出发日期为必填项",
-      "return_date_invalid": "返回日期必须在出发日期之后",
+      "return_date_invalid": "返回日期必须至少在出发日期后1天",
       "passengers_min": "乘客人数至少为 1",
       "passengers_max": "最多乘客人数为 20"
     }
@@ -153,7 +153,7 @@
       "from_required": "Điểm đi là bắt buộc",
       "to_required": "Điểm đến là bắt buộc",
       "departure_date_required": "Ngày khởi hành là bắt buộc",
-      "return_date_invalid": "Ngày trở về phải sau ngày khởi hành",
+      "return_date_invalid": "Ngày trở về phải ít nhất 1 ngày sau ngày khởi hành",
       "passengers_min": "Số hành khách tối thiểu là 1",
       "passengers_max": "Số hành khách tối đa là 20"
     }
@@ -206,7 +206,7 @@
       "from_required": "出発地は必須です",
       "to_required": "到着地は必須です",
       "departure_date_required": "出発日は必須です",
-      "return_date_invalid": "帰国日は出発日より後でなければなりません",
+      "return_date_invalid": "帰国日は出発日より少なくとも1日後でなければなりません",
       "passengers_min": "乗客は最低1人必要です",
       "passengers_max": "最大乗客数は20人です"
     }
@@ -259,7 +259,7 @@
       "from_required": "จำเป็นต้องระบุจุดเริ่มต้น",
       "to_required": "จำเป็นต้องระบุจุดหมาย",
       "departure_date_required": "จำเป็นต้องระบุวันที่เดินทาง",
-      "return_date_invalid": "วันที่กลับต้องมาหลังวันที่เดินทาง",
+      "return_date_invalid": "วันที่กลับต้องอย่างน้อย 1 วันหลังจากวันที่เดินทาง",
       "passengers_min": "ต้องมีผู้โดยสารอย่างน้อย 1 คน",
       "passengers_max": "ผู้โดยสารสูงสุด 20 คน"
     }
@@ -312,7 +312,7 @@
       "from_required": "출발지는 필수입니다",
       "to_required": "도착지는 필수입니다",
       "departure_date_required": "출발 날짜는 필수입니다",
-      "return_date_invalid": "귀국 날짜는 출발 날짜 이후여야 합니다",
+      "return_date_invalid": "귀국 날짜는 출발 날짜로부터 최소 1일 후여야 합니다",
       "passengers_min": "최소 승객 수는 1명입니다",
       "passengers_max": "최대 승객 수는 20명입니다"
     }
@@ -365,7 +365,7 @@
       "from_required": "El origen es obligatorio",
       "to_required": "El destino es obligatorio",
       "departure_date_required": "La fecha de salida es obligatoria",
-      "return_date_invalid": "La fecha de regreso debe ser posterior a la fecha de salida",
+      "return_date_invalid": "La fecha de regreso debe ser al menos 1 día después de la fecha de salida",
       "passengers_min": "El número de pasajeros debe ser al menos 1",
       "passengers_max": "El máximo de pasajeros es 20"
     }
