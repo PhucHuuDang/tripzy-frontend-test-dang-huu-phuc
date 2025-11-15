@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Tripzy",
+    absolute: "Tripzy",
     template: "%s | Tripzy",
   },
   description: "Tripzy is a platform for booking flights, hotels, and buses.",
