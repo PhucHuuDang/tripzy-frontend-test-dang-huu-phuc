@@ -1,6 +1,5 @@
 "use client";
 
-import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { format } from "date-fns";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -93,23 +92,5 @@ export function SearchContent() {
         </CardContent>
       </Card>
     </div>
-  );
-}
-
-/* ------------------------- Export Page ------------------------- */
-
-export default function SearchPage() {
-  const { t } = useLanguage();
-
-  return (
-    <Suspense
-      fallback={
-        <div className="flex items-center justify-center h-screen">
-          {t("common.loading")}
-        </div>
-      }
-    >
-      <SearchContent />
-    </Suspense>
   );
 }
