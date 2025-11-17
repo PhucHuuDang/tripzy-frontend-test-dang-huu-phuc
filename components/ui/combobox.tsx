@@ -290,10 +290,12 @@ const ComboboxList = ({
   children,
   maxWidth,
   emptyMessage = "No results",
+  className,
 }: {
   children?: React.ReactNode;
   maxWidth?: number;
   emptyMessage?: string;
+  className?: string;
 }) => {
   const context = useContext(ComboboxContext);
   const [position, setPosition] = useState<{ top?: number; bottom?: number }>();
@@ -439,10 +441,11 @@ const ComboboxList = ({
     <Material
       ref={menuRef}
       type="menu"
-      className={clsx(
+      className={cn(
         "absolute w-full z-50 left-1/2 -translate-x-[40%] min-w-[331px]",
         context?.isOpen && "opacity-100",
-        !context?.isOpen && "opacity-0 pointer-events-none duration-200"
+        !context?.isOpen && "opacity-0 pointer-events-none duration-200",
+        className
       )}
       style={{ maxWidth, ...position }}
     >
@@ -451,7 +454,7 @@ const ComboboxList = ({
           filteredChildren
         ) : (
           <li
-            className={clsx(
+            className={cn(
               "flex justify-center items-center p-2 text-gray-900",
               context?.size === "large" ? "text-base" : "text-sm"
             )}

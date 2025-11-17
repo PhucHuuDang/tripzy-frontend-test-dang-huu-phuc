@@ -25,6 +25,26 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo.png",
   },
+
+  openGraph: {
+    images: [
+      {
+        url: "/logo.png",
+      },
+    ],
+  },
+
+  authors: [
+    {
+      name: "Dang Huu Phuc",
+      url: "https://github.com/PhucHuuDang",
+    },
+  ],
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

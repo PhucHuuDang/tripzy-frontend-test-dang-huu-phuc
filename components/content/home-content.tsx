@@ -12,9 +12,9 @@ export function HomeContent() {
   const { t } = useLanguage();
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex flex-col">
       {/* Hero Section */}
-      <main className="flex flex-1 flex-col items-center px-4 sm:px-6 md:px-10 lg:px-20 pt-8 md:pt-12 pb-12 md:pb-16">
+      <main className="flex flex-1 flex-col items-center px-4 sm:px-6 md:px-10 lg:px-20 pt-8 md:pt-12 pb-12 md:pb-16 ">
         <div className="w-full max-w-[1300px] space-y-8 md:space-y-12 flex flex-col items-center">
           {/* Hero Text */}
           <div className="space-y-2 md:space-y-3 text-center px-4">
@@ -37,8 +37,8 @@ export function HomeContent() {
             <Card className="border-0 shadow-lg w-full min-h-[328px] h-auto rounded-[16px] p-0 pt-2 lg:min-w-[1300px] lg:max-w-[1300px]">
               <CardContent className="p-0 m-0 h-full ">
                 <Tabs defaultValue="bus" className="w-full h-full">
-                  <div className="px-2 sm:px-3">
-                    <TabsList className="grid w-full grid-cols-3 rounded-[16px] shadow-md p-0 h-auto bg-transparent">
+                  <div className="px-2 sm:px-3 pb-4 rounded-b-[18px] shadow-md">
+                    <TabsList className="grid w-full grid-cols-3 rounded-[16px] p-0 h-auto bg-transparent ">
                       <TabsTrigger
                         value="bus"
                         className="flex items-center justify-start gap-1 sm:gap-2 border-b-2 bg-white data-[state=active]:bg-[#EBF9FF] w-full min-h-[60px] sm:min-h-[74px] rounded-[8px] py-2 sm:py-[12px] px-2 sm:px-[16px] cursor-pointer transition-all duration-300"
@@ -98,7 +98,9 @@ export function HomeContent() {
                     className="w-full px-2 sm:px-3 h-full"
                   >
                     <div className="my-3 sm:my-4">
-                      <BusContent />
+                      <BlurFade delay={0.25} inView>
+                        <BusContent />
+                      </BlurFade>
                     </div>
                   </TabsContent>
 

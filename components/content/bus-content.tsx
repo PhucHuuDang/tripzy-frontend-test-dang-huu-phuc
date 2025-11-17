@@ -30,6 +30,8 @@ import { useMounted } from "@/hooks/use-mounted";
 import { Skeleton } from "../ui/skeleton";
 import { useLanguage } from "@/hooks/use-language";
 import { BlurFade } from "../ui/blur-fade";
+import { cn } from "@/lib/utils";
+import { useWatch } from "react-hook-form";
 
 const ErrorMessage = ({ error }: { error: string }) => {
   return (
@@ -62,13 +64,11 @@ export const BusContent = () => {
   const mounted = useMounted();
 
   const handleChangeDirection = () => {
-    // Swap the values - use temp variables to avoid state update race condition
     const tempFrom = from;
     const tempTo = to;
     setFrom(tempTo);
     setTo(tempFrom);
 
-    // Toggle direction for visual indicator
     setDirection(direction === "from" ? "to" : "from");
   };
 
@@ -167,14 +167,16 @@ export const BusContent = () => {
     }
   }, [dateRange?.to]);
 
-  // console.log({ language });
+  const isError = Object.keys(formErrors).length > 0;
+
+  // console.log({ formErrors });
+  // console.log({ isError });
 
   if (!mounted)
     return (
       <>
         <Skeleton className="w-full h-[52px] rounded-md" />
         <Skeleton className="w-full h-[52px] rounded-md" />
-
         <Skeleton className="w-full h-[52px] rounded-md" />
       </>
     );
@@ -184,7 +186,12 @@ export const BusContent = () => {
         {/* From/To Section */}
         <div className="w-full lg:w-1/2 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-0">
           <div className="flex flex-col gap-2 items-start w-full sm:w-auto sm:flex-1">
-            <span className="font-medium leading-[12px] text-xs text-[#65686F]">
+            <span
+              className={cn(
+                "font-medium leading-[12px] text-xs text-[#65686F]",
+                formErrors.from ? "text-rose-500" : "text-gray-900"
+              )}
+            >
               {t("bus_form.bus_from")}
             </span>
 
@@ -194,6 +201,7 @@ export const BusContent = () => {
               value={from}
               onChange={setFrom}
               placeholder={t("bus_form.placeholder_location")}
+              errored={!!formErrors.from}
             />
 
             <ErrorMessage error={formErrors.from} />
@@ -222,7 +230,12 @@ export const BusContent = () => {
           </div>
 
           <div className="flex flex-col gap-2 items-start w-full sm:w-auto sm:flex-1">
-            <span className="font-medium leading-[12px] text-xs text-[#65686F]">
+            <span
+              className={cn(
+                "font-medium leading-[12px] text-xs text-[#65686F]",
+                formErrors.to ? "text-rose-500" : "text-gray-900"
+              )}
+            >
               {t("bus_form.bus_to")}
             </span>
 
@@ -234,6 +247,7 @@ export const BusContent = () => {
               value={to}
               onChange={setTo}
               placeholder={t("bus_form.placeholder_location")}
+              errored={!!formErrors.to}
             />
 
             <ErrorMessage error={formErrors.to} />
@@ -246,7 +260,7 @@ export const BusContent = () => {
             open={isOpenDepartureDate}
             onOpenChange={setIsOpenDepartureDate}
           >
-            <PopoverTrigger className="w-full">
+            <PopoverTrigger className="w-full ">
               <div className="flex flex-col gap-2 items-start w-full">
                 <span className="font-medium leading-[12px] text-xs text-[#65686F]">
                   {t("bus_form.departure_date")}
@@ -320,7 +334,10 @@ export const BusContent = () => {
                   className="w-4 h-4 rounded border-[#CCCFD5] text-[#19C0FF] focus:ring-[#19C0FF] cursor-pointer"
                 />
                 <Label
-                  className="text-xs font-medium leading-[12px] text-gray-900 cursor-pointer select-none "
+                  className={cn(
+                    "text-xs font-medium leading-[12px]  cursor-pointer select-none  ",
+                    formErrors.returnDate ? "text-rose-500" : "text-gray-900"
+                  )}
                   onClick={() => setIsOpenRoundTrip(!isOpenRoundTrip)}
                 >
                   {t("common.round_trip")}
@@ -328,12 +345,17 @@ export const BusContent = () => {
               </div>
 
               <div
-                className={`bg-white h-[52px]  flex items-center gap-2 w-full text-[#65686F] px-4 py-2 focus:ring-[#19C0FF] focus:ring-offset-2 focus:outline-none border focus:border-[#19C0FF] rounded-md cursor-pointer transition duration-300 ${
-                  isOpenDepartureDate ? " border-[#19C0FF]" : ""
-                }`}
+                className={cn(
+                  "bg-white h-[52px]  flex items-center gap-2 w-full text-[#65686F] px-4 py-2 focus:ring-[#19C0FF] focus:ring-offset-2 focus:outline-none border focus:border-[#19C0FF] rounded-md cursor-pointer transition duration-300",
+                  formErrors.returnDate ? "border-rose-500" : "border-gray-200"
+                )}
               >
                 <CalendarIcon className="size-4 text-black" />
-                <span>
+                <span
+                  className={cn(
+                    formErrors.returnDate ? "text-rose-500" : "text-gray-900"
+                  )}
+                >
                   {dateRange?.to
                     ? format(dateRange?.to, "dd/MM/yyyy")
                     : t("bus_form.placeholder_return")}
@@ -364,7 +386,7 @@ export const BusContent = () => {
                 className="[--cell-size:--spacing(8)] md:[--cell-size:--spacing(10)]"
                 disabled={{
                   // before: dateRange?.from
-                  //   ? new Date(dateRange.from.getTime() + 24 * 60 * 60 * 1000) // Day after departure
+                  //   ? new Date(dateRange.from.getTime() + 24 * 60 * 60 * 1000)
                   //   : new Date(), // Today if no departure selected
                   before: new Date(),
                   to: dateRange?.from ?? new Date(),

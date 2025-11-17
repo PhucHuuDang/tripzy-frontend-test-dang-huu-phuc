@@ -318,3 +318,20 @@
 .react-day-picker .rd-day--weekend {
   grid-column: span 2; /* gộp Thứ 7 và Chủ nhật */
 }
+
+html {
+  scroll-behavior: smooth;
+  word-break: break-word;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(var(--s)) oklch(var(--p)) !important;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(var(--p));
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: oklch(var(--s));
+}

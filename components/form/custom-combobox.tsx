@@ -10,6 +10,7 @@ interface CustomComboboxProps {
   onChange?: (value: string) => void;
 
   options: LocationProps[];
+  errored?: boolean;
 }
 export const CustomCombobox = ({
   placeholder,
@@ -17,12 +18,14 @@ export const CustomCombobox = ({
   value,
   onChange,
   options,
+  errored,
 }: CustomComboboxProps) => {
   const [internalValue, setInternalValue] = useState(value ?? "");
 
   // Sync internal value with prop value when it changes
   useEffect(() => {
     if (value !== undefined) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       setInternalValue(value);
     }
   }, [value]);
@@ -39,10 +42,11 @@ export const CustomCombobox = ({
         // width={256}
         value={value ?? internalValue}
         onChange={handleChange}
-        className="w-full"
+        className="w-full "
+        errored={errored}
       >
         <Combobox.Input />
-        <Combobox.List>
+        <Combobox.List className="max-h-[400px] overflow-y-auto">
           {options.map((item: LocationProps) => (
             <Combobox.Option
               key={item.short_code}
